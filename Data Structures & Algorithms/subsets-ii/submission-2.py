@@ -1,0 +1,24 @@
+# Instead of using used, we use start
+
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        res = []
+        path = []
+
+        # or you can do it like this
+        res.append([])
+
+        def backtrack(start):
+
+            for i in range(start, len(nums)):
+                if i > start and nums[i] == nums[i - 1]:
+                    continue
+
+                path.append(nums[i])
+                res.append(path.copy())
+                backtrack(i + 1)
+                path.pop()
+
+        backtrack(0)
+        return res
